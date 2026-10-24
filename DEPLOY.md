@@ -1,7 +1,15 @@
 # 上线部署指南
 
-当前状态：本地版已完成，`public/` 是可直接部署的静态站点。
-推荐顺序：**EdgeOne Pages（国内访问较好）→ Cloudflare Pages（备用/全球）→ GitHub 自动部署**。
+> **当前状态（2026-10-24）**：已通过 GitHub Actions 部署到
+> <https://defenderzero.github.io/cguoblog/>。
+> 下文保留 EdgeOne / Cloudflare 方案，用于国内加速或以后迁移。
+>
+> 注意：GitHub Pages 是项目页，`_config.yml` 里是 `root: /cguoblog/`；
+> 迁移到根域名（EdgeOne / Cloudflare / 自定义域名）时，要把 `root` 改回 `/`，
+> 并同步修改 `url`，否则 CSS、图片和站内链接会 404。
+
+当前线上：GitHub Pages（push 到 `main` 自动构建）。
+后续可选：EdgeOne Pages（国内访问较好）/ Cloudflare Pages（备用/全球）。
 
 ---
 

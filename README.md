@@ -1,9 +1,11 @@
 # 我的博客 · Aurora
 
 一个用 [Hexo 7](https://hexo.io/zh-cn/) + 自研 Aurora 主题搭建的静态个人博客。
-当前是 **Phase 2 本地版**：版式、响应式、深色模式、搜索、目录、移动端目录、代码复制、打赏弹窗已完成；
-评论（Giscus / Twikoo）、Pages CMS 浏览器编辑、访问统计已经接好配置，按 [docs/phase2.md](docs/phase2.md) 填参数即可启用。
-自动部署和正式域名在 Phase 3 接入。
+
+**线上地址：<https://defenderzero.github.io/cguoblog/>**
+
+当前已上线 GitHub Pages：推送 `main` 后由 GitHub Actions 自动构建部署。
+评论（Giscus / Twikoo）、Pages CMS 浏览器编辑、访问统计的代码已经接好，按 [docs/phase2.md](docs/phase2.md) 填参数即可启用。
 
 ## 快速开始
 
@@ -13,7 +15,7 @@ npm install
 npx hexo server
 ```
 
-打开 <http://127.0.0.1:4000>。
+打开 <http://127.0.0.1:4000/cguoblog/>（GitHub Pages 项目页使用 `/cguoblog/` 子路径）。
 
 ## 目录结构
 
@@ -121,18 +123,25 @@ url: https://example.com   # 上线前改成真实域名
 - 后台：推送到 GitHub 后，用 [Pages CMS](https://pagescms.org/) 打开仓库即可编辑文章
 - 统计：填 Cloudflare Web Analytics 令牌或 Umami 配置，`analytics.enable` 改为 `true`
 
-## 构建与部署（Phase 3）
+## 构建与部署
+
+当前使用 **GitHub Actions → GitHub Pages** 自动部署：
+
+- 仓库：<https://github.com/defenderzero/cguoblog>
+- 工作流：`.github/workflows/deploy.yml`
+- 触发：推送到 `main`
+- 线上：<https://defenderzero.github.io/cguoblog/>
+
+本地构建：
 
 ```bash
 npm run build
 ```
 
-生成结果在 `public/`。部署时：
+生成结果在 `public/`。
 
-1. 把整个 `blog/` 推送到 GitHub 仓库（`node_modules/` 和 `public/` 已在 `.gitignore` 中）。
-2. 在 EdgeOne Pages 或 Cloudflare Pages 导入仓库。
-3. 构建命令填 `npm run build`，输出目录填 `public`。
-4. 部署完成后绑定免费二级域名或自己的域名。
+> GitHub Pages 项目页在 `/cguoblog/` 子路径下，`_config.yml` 的 `url` 和 `root` 已按此设置。
+> 如果以后迁移到 EdgeOne Pages / Cloudflare Pages 的根域名，需要把 `root` 改回 `/`，并同步修改 `url`。
 
 ## 当前占位项
 
@@ -140,7 +149,7 @@ npm run build
 - 统计：代码已接入，默认关闭
 - 浏览器编辑：`.pages.yml` 已配置，推送到 GitHub 后可在 Pages CMS 使用
 - 打赏：二维码是占位图
-- 域名：`_config.yml` 里是 `https://example.com`
+- 域名：当前使用 GitHub Pages 免费域名 `defenderzero.github.io/cguoblog`；尚未绑定独立域名
 - 社交链接、邮箱：关于页里是占位内容
 - 社交分享图：当前封面是 SVG，部分平台不显示，上线前建议导出 PNG
 
