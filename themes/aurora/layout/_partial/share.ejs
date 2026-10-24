@@ -1,0 +1,11 @@
+<%
+var shareUrl = full_url_for(page.path);
+var shareUrlEncoded = encodeURIComponent(shareUrl);
+var shareTitle = encodeURIComponent(page.title || config.title);
+%>
+<div class="share-row">
+  <span class="share-label">分享</span>
+  <a class="share-btn" href="https://service.weibo.com/share/share.php?url=<%= shareUrlEncoded %>&title=<%= shareTitle %>" target="_blank" rel="noopener">微博</a>
+  <a class="share-btn" href="https://twitter.com/intent/tweet?url=<%= shareUrlEncoded %>&text=<%= shareTitle %>" target="_blank" rel="noopener">X</a>
+  <button class="share-btn" type="button" data-copy-link="<%= shareUrl %>">复制链接</button>
+</div>

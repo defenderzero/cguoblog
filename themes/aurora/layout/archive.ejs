@@ -1,0 +1,37 @@
+<%
+var heading = page.title || '文章归档';
+if (page.archive) heading = '文章归档';
+if (page.category) heading = '分类：' + page.category;
+if (page.tag) heading = '标签：' + page.tag;
+%>
+<div class="layout">
+  <div class="content-col">
+    <div class="card page-head">
+      <h1><%= heading %></h1>
+      <p>共 <%= page.posts.length %> 篇文章</p>
+    </div>
+
+    <div class="card archive-card">
+      <%
+      var lastYear = '';
+      page.posts.each(function (post) {
+        var y = date(post.date, 'YYYY');
+        if (y !== lastYear) {
+          lastYear = y;
+      %>
+        <div class="archive-year"><%= y %></div>
+      <% } %>
+        <a class="archive-item" href="<%- url_for(post.path) %>">
+          <time><%= date(post.date, 'MM-DD') %></time>
+          <span><%= post.title %></span>
+        </a>
+      <% }); %>
+    </div>
+
+    <%- partial('_partial/pagination') %>
+  </div>
+
+  <aside class="sidebar">
+    <%- partial('_partial/sidebar') %>
+  </aside>
+</div>

@@ -1,0 +1,79 @@
+<%
+var pageTitle = config.title;
+if (is_home()) {
+  pageTitle = config.title + (config.subtitle ? ' · ' + config.subtitle : '');
+} else if (page.title) {
+  pageTitle = page.title + ' · ' + config.title;
+}
+var rawDesc = page.description || (page.excerpt ? strip_html(page.excerpt) : config.description);
+var desc = rawDesc ? rawDesc.replace(/\s+/g, ' ').trim().substring(0, 140) : '';
+var cover = page.cover ? full_url_for(page.cover) : full_url_for('/images/cover-default.svg');
+var canonical = is_home() ? full_url_for('/') : full_url_for(page.path || '/');
+var keywords = config.keywords || '';
+if (page.tags && page.tags.length) {
+  var tagNames = [];
+  page.tags.each(function (t) { tagNames.push(t.name); });
+  keywords = tagNames.join(',');
+}
+var isArticle = is_post();
+%>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a6dff">
+<title><%= pageTitle %></title>
+<meta name="description" content="<%= desc %>">
+<meta name="keywords" content="<%= keywords %>">
+<meta name="author" content="<%= config.author %>">
+<link rel="canonical" href="<%= canonical %>">
+<link rel="icon" type="image/svg+xml" href="<%- url_for('/images/favicon.svg') %>">
+<link rel="alternate" type="application/atom+xml" title="<%= config.title %>" href="<%- url_for('/atom.xml') %>">
+<meta property="og:type" content="<%= isArticle ? 'article' : 'website' %>">
+<meta property="og:title" content="<%= pageTitle %>">
+<meta property="og:description" content="<%= desc %>">
+<meta property="og:url" content="<%= canonical %>">
+<meta property="og:site_name" content="<%= config.title %>">
+<meta property="og:image" content="<%= cover %>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= pageTitle %>">
+<meta name="twitter:description" content="<%= desc %>">
+<meta name="twitter:image" content="<%= cover %>">
+<% if (isArticle) { %>
+<meta property="article:published_time" content="<%- date_xml(page.date) %>">
+<meta property="article:modified_time" content="<%- date_xml(page.updated || page.date) %>">
+<% } %>
+<link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch (e) {}
+})();
+</script>
+<% if (isArticle) { %>
+<script type="application/ld+json">
+<%- JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": page.title,
+  "description": desc,
+  "datePublished": date_xml(page.date),
+  "dateModified": date_xml(page.updated || page.date),
+  "author": { "@type": "Person", "name": config.author },
+  "publisher": { "@type": "Organization", "name": config.title },
+  "mainEntityOfPage": canonical,
+  "image": cover
+}) %>
+</script>
+<% } %>
+<% if (theme.analytics && theme.analytics.enable) { %>
+  <% if (theme.analytics.provider === 'cloudflare' && theme.analytics.cloudflare_token) { %>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='<%- JSON.stringify({ token: theme.analytics.cloudflare_token }) %>'></script>
+  <% } else if (theme.analytics.provider === 'umami' && theme.analytics.umami_script && theme.analytics.umami_website_id) { %>
+    <script defer src="<%= theme.analytics.umami_script %>" data-website-id="<%= theme.analytics.umami_website_id %>"></script>
+  <% } else if (theme.analytics.provider === 'custom' && theme.analytics.custom_head) { %>
+    <%- theme.analytics.custom_head %>
+  <% } %>
+<% } %>

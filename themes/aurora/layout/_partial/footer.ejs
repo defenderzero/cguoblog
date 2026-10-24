@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <a class="footer-brand" href="<%- url_for('/') %>">
+        <span class="brand-mark small"><%= theme.brand_mark || '博' %></span>
+        <span><%= config.title %></span>
+      </a>
+      <%
+      var nowYear = new Date().getFullYear();
+      var sinceYear = theme.since || nowYear;
+      %>
+      <p>© <%= sinceYear %><%= nowYear !== sinceYear ? '–' + nowYear : '' %> <%= config.author %> · 保留所有权利</p>
+    </div>
+    <div class="footer-links">
+      <a href="<%- url_for('/archives/') %>">归档</a>
+      <a href="<%- url_for('/atom.xml') %>">RSS</a>
+      <a href="<%- url_for('/about/') %>">关于</a>
+      <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+<% if (theme.donate && theme.donate.enable) { %>
+<div class="modal" id="donateModal" role="dialog" aria-modal="true" aria-label="打赏支持">
+  <div class="modal-backdrop" data-donate-close></div>
+  <div class="modal-card">
+    <button class="modal-close" type="button" data-donate-close aria-label="关闭">×</button>
+    <h3>感谢你的支持</h3>
+    <p class="modal-sub">如果这里的内容对你有帮助，可以请我喝杯咖啡 ☕</p>
+    <div class="donate-tabs">
+      <button type="button" class="active" data-donate-tab="alipay">支付宝</button>
+      <button type="button" data-donate-tab="wechat">微信支付</button>
+    </div>
+    <div class="donate-panel active" data-donate-panel="alipay">
+      <img src="<%- url_for(theme.donate.alipay) %>" alt="支付宝收款码">
+    </div>
+    <div class="donate-panel" data-donate-panel="wechat">
+      <img src="<%- url_for(theme.donate.wechat) %>" alt="微信收款码">
+    </div>
+    <p class="donate-note"><%= theme.donate.note %></p>
+  </div>
+</div>
+<% } %>

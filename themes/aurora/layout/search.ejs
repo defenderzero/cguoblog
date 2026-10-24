@@ -1,0 +1,19 @@
+<div class="layout">
+  <div class="content-col">
+    <div class="card search-page-card">
+      <h1 class="page-title">搜索</h1>
+      <p class="page-desc">输入关键词，搜索全站文章。</p>
+      <div class="search-page-bar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+        <input type="search" id="searchPageInput" placeholder="搜索标题或正文…" autocomplete="off">
+      </div>
+      <div class="search-results search-page-results" id="searchPageResults">
+        <p class="search-hint">输入关键词开始搜索</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <%- partial('_partial/sidebar') %>
+  </aside>
+</div>

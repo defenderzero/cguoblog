@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body class="<%- is_post() ? 'is-post' : (is_home() ? 'is-home' : 'is-page') %>" data-root="<%- url_for('/') %>">
+  <div class="reading-progress" id="readingProgress"></div>
+  <%- partial('_partial/header') %>
+  <main class="site-main">
+    <div class="container">
+      <%- body %>
+    </div>
+  </main>
+  <%- partial('_partial/footer') %>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+  </button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+    <img src="" alt="">
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="<%- url_for('/js/main.js') %>"></script>
+</body>
+</html>

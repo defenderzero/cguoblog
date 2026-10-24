@@ -1,0 +1,10 @@
+node_modules/
+public/
+.preview/
+.deploy*/
+db.json
+*.zip
+.wrangler/
+*.log
+.DS_Store
+Thumbs.db

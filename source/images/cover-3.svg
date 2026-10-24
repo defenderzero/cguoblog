@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="本地部署示例">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f9b8e"/>
+      <stop offset="0.55" stop-color="#0b6b7d"/>
+      <stop offset="1" stop-color="#0b2b4a"/>
+    </linearGradient>
+    <pattern id="grid3" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg3)"/>
+  <rect width="1200" height="675" fill="url(#grid3)"/>
+  <circle cx="1000" cy="170" r="200" fill="rgba(120,255,230,0.08)"/>
+  <circle cx="1090" cy="560" r="150" fill="rgba(120,255,230,0.06)"/>
+  <text x="88" y="270" fill="rgba(255,255,255,0.6)" font-family="Arial, Helvetica, sans-serif" font-size="21" letter-spacing="8">LOCAL DEPLOY</text>
+  <text x="86" y="374" fill="#ffffff" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="72" font-weight="700">本地部署示例</text>
+  <text x="88" y="442" fill="rgba(255,255,255,0.82)" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="25" letter-spacing="1">版式演示 · 非真实教程</text>
+  <text x="88" y="594" fill="rgba(255,255,255,0.5)" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="4">AI · DEMO · 2026</text>
+</svg>

@@ -1,0 +1,76 @@
+media:
+  input: source/images
+  output: /images
+  rename: safe
+  categories:
+    - image
+
+content:
+  - name: posts
+    label: 文章
+    type: collection
+    path: source/_posts
+    format: yaml-frontmatter
+    filename:
+      template: "{year}-{month}-{day}-{slug}.md"
+      field: create
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 发布日期
+        type: date
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm:ss"
+      - name: categories
+        label: 分类
+        type: select
+        options:
+          multiple: true
+          values:
+            - 技术
+            - 生活
+            - 随笔
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+      - name: cover
+        label: 封面图
+        type: image
+      - name: description
+        label: 摘要
+        type: text
+      - name: top
+        label: 置顶
+        type: boolean
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: about
+    label: 关于页
+    type: file
+    path: source/about/index.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: 标题
+        type: string
+      - name: description
+        label: 描述
+        type: text
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown

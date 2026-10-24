@@ -1,0 +1,9 @@
+<div class="error-page card">
+  <div class="error-code">404</div>
+  <h1>页面走丢了</h1>
+  <p>你访问的页面不存在，或者已经被移动。</p>
+  <div class="error-actions">
+    <a class="btn btn-primary" href="<%- url_for('/') %>">返回首页</a>
+    <button class="btn btn-ghost" type="button" onclick="history.back()">返回上一页</button>
+  </div>
+</div>

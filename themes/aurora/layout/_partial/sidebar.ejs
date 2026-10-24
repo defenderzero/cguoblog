@@ -1,0 +1,135 @@
+<div class="widget">
+  <div class="widget-tabs" role="tablist" aria-label="侧栏内容">
+    <button class="active" type="button" data-tab="recent" role="tab">近期</button>
+    <button type="button" data-tab="popular" role="tab">热门</button>
+    <button type="button" data-tab="comments" role="tab">评论</button>
+    <button type="button" data-tab="tags" role="tab">标签</button>
+  </div>
+
+  <div class="tab-panel active" data-panel="recent">
+    <% site.posts.sort('-date').limit(5).each(function (post) { %>
+      <a class="mini-post" href="<%- url_for(post.path) %>">
+        <img src="<%- url_for(post.cover || '/images/cover-default.svg') %>" alt="<%= post.title %>" loading="lazy">
+        <span class="mini-post-body">
+          <span class="mini-post-title"><%= post.title %></span>
+          <time><%= date(post.date, 'YYYY-MM-DD') %></time>
+        </span>
+      </a>
+    <% }); %>
+  </div>
+
+  <div class="tab-panel" data-panel="popular">
+    <%
+    var popularPosts = [];
+    site.posts.sort('-date').each(function (post) {
+      if (post.top) popularPosts.push(post);
+    });
+    site.posts.sort('-date').each(function (post) {
+      if (popularPosts.length < 5 && popularPosts.indexOf(post) === -1) {
+        popularPosts.push(post);
+      }
+    });
+    popularPosts.slice(0, 5).forEach(function (post, i) {
+    %>
+      <a class="mini-post ranked" href="<%- url_for(post.path) %>">
+        <span class="rank rank-<%= i + 1 %>"><%= i + 1 %></span>
+        <span class="mini-post-body">
+          <span class="mini-post-title"><%= post.title %></span>
+          <time><%= date(post.date, 'YYYY-MM-DD') %></time>
+        </span>
+      </a>
+    <% }); %>
+  </div>
+
+  <div class="tab-panel" data-panel="comments">
+    <div class="side-empty">
+      <% if (theme.comments && theme.comments.enable) { %>
+        <p>评论已启用</p>
+        <p class="muted">拉到文章底部即可留言。</p>
+      <% } else { %>
+        <p>评论功能未启用</p>
+        <p class="muted">在主题配置中启用 Giscus 或 Twikoo 后显示。</p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="tab-panel" data-panel="tags">
+    <div class="tag-cloud">
+      <%
+      var tagCount = 0;
+      site.tags.each(function (tag) {
+        if (tagCount < 24) {
+          tagCount++;
+      %>
+        <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+      <%
+        }
+      });
+      %>
+    </div>
+  </div>
+</div>
+
+<% if (theme.sidebar && theme.sidebar.show_categories) { %>
+<div class="widget">
+  <div class="widget-title">分类</div>
+  <div class="cat-list">
+    <%
+    var catCount = 0;
+    site.categories.each(function (cat) {
+      if (catCount < 8) {
+        catCount++;
+    %>
+      <a href="<%- url_for(cat.path) %>">
+        <span class="cat-name"><%= cat.name %></span>
+        <span class="cat-count"><%= cat.length %></span>
+      </a>
+    <%
+      }
+    });
+    %>
+  </div>
+</div>
+<% } %>
+
+<% if (theme.sidebar && theme.sidebar.show_archives) { %>
+<%
+var monthMap = {};
+site.posts.each(function (post) {
+  var key = date(post.date, 'YYYY-MM');
+  monthMap[key] = (monthMap[key] || 0) + 1;
+});
+var monthKeys = Object.keys(monthMap).sort().reverse().slice(0, 8);
+%>
+<div class="widget">
+  <div class="widget-title">归档</div>
+  <div class="archive-select-wrap">
+    <select class="archive-select" onchange="if(this.value){location.href=this.value;}">
+      <option value="">选择月份</option>
+      <% monthKeys.forEach(function (key) { var parts = key.split('-'); %>
+        <option value="<%- url_for('/archives/' + parts[0] + '/' + parts[1] + '/') %>"><%= parts[0] %> 年 <%= parseInt(parts[1], 10) %> 月（<%= monthMap[key] %>）</option>
+      <% }); %>
+    </select>
+  </div>
+  <a class="widget-more" href="<%- url_for('/archives/') %>">查看全部归档 →</a>
+</div>
+<% } %>
+
+<% if (theme.sidebar && theme.sidebar.show_links && theme.links && theme.links.length) { %>
+<div class="widget">
+  <div class="widget-title">友情链接</div>
+  <div class="link-list">
+    <% theme.links.forEach(function (link) { %>
+      <a href="<%= link.url %>" target="_blank" rel="noopener"><%= link.name %></a>
+    <% }); %>
+  </div>
+</div>
+<% } %>
+
+<% if (theme.donate && theme.donate.enable) { %>
+<div class="widget support-widget">
+  <div class="widget-title">支持本站</div>
+  <p>如果内容对你有帮助，欢迎请我喝杯咖啡。</p>
+  <button class="btn btn-donate full" type="button" data-donate-open>打赏支持</button>
+</div>
+<% } %>

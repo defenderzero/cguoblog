@@ -1,0 +1,72 @@
+# ===== Aurora 主题配置 =====
+# 站点左上角的标记字（一个字）
+brand_mark: 博
+since: 2026
+
+# 顶部导航
+menu:
+  - name: 首页
+    url: /
+  - name: 技术
+    url: /categories/tech/
+  - name: 生活
+    url: /categories/life/
+  - name: 归档
+    url: /archives/
+  - name: 关于
+    url: /about/
+
+# 侧栏开关
+sidebar:
+  show_toc: true
+  show_tabs: true
+  show_categories: true
+  show_archives: true
+  show_links: true
+
+# 打赏（默认开启，图片请替换成自己的收款码）
+donate:
+  enable: true
+  alipay: /images/donate-alipay.svg
+  wechat: /images/donate-wechat.svg
+  note: 示例收款码，请在主题配置中替换为你自己的。
+
+# 友情链接
+links:
+  - name: Hexo 中文文档
+    url: https://hexo.io/zh-cn/
+  - name: EdgeOne Pages
+    url: https://pages.edgeone.ai/
+  - name: Cloudflare Pages
+    url: https://pages.cloudflare.com/
+
+# 评论：Giscus（推荐，零后端）或 Twikoo（需要自建后端）
+comments:
+  enable: false
+  provider: giscus
+
+  giscus:
+    repo: ""
+    repo_id: ""
+    category: "Announcements"
+    category_id: ""
+    mapping: "pathname"
+    strict: "0"
+    reactions_enabled: "1"
+    emit_metadata: "0"
+    input_position: "bottom"
+    theme: "preferred_color_scheme"
+    lang: "zh-CN"
+
+  twikoo:
+    env_id: ""
+    cdn: "https://unpkg.com/twikoo@2/dist/twikoo.min.js"
+
+# 访问统计（默认关闭）
+analytics:
+  enable: false
+  provider: cloudflare   # cloudflare | umami | custom
+  cloudflare_token: ""
+  umami_script: ""
+  umami_website_id: ""
+  custom_head: ""

@@ -1,0 +1,109 @@
+<%
+var readMinutes = Math.max(1, Math.ceil(strip_html(page.content).replace(/\s+/g, '').length / 400));
+var cats = [];
+if (page.categories) { page.categories.each(function (c) { cats.push(c); }); }
+%>
+<div class="layout">
+  <div class="content-col">
+    <nav class="breadcrumb" aria-label="面包屑">
+      <a href="<%- url_for('/') %>">首页</a>
+      <span class="sep">/</span>
+      <% if (cats.length) { %>
+        <a href="<%- url_for(cats[0].path) %>"><%= cats[0].name %></a>
+        <span class="sep">/</span>
+      <% } %>
+      <span class="current"><%= page.title %></span>
+    </nav>
+
+    <article class="card article-card">
+      <header class="post-header">
+        <% if (cats.length) { %>
+          <div class="post-cats">
+            <% cats.forEach(function (c) { %><a href="<%- url_for(c.path) %>"><%= c.name %></a><% }); %>
+          </div>
+        <% } %>
+        <h1 class="post-title"><%= page.title %></h1>
+        <div class="post-meta">
+          <span class="meta-author">
+            <img class="avatar" src="<%- url_for('/images/avatar.svg') %>" alt="<%= config.author %>">
+            <span><%= page.author || config.author %></span>
+          </span>
+          <span class="meta-dot"></span>
+          <time datetime="<%- date_xml(page.date) %>"><%= date(page.date, 'YYYY年MM月DD日') %></time>
+          <span class="meta-dot"></span>
+          <span>约 <%= readMinutes %> 分钟阅读</span>
+        </div>
+      </header>
+
+      <% if (page.cover) { %>
+        <figure class="post-cover">
+          <img src="<%- url_for(page.cover) %>" alt="<%= page.title %>">
+        </figure>
+      <% } %>
+
+      <%- partial('_partial/mobile-toc') %>
+
+      <div class="post-content" id="postContent">
+        <%- page.content %>
+      </div>
+
+      <% if (page.tags && page.tags.length) { %>
+        <div class="post-tags">
+          <span class="post-tags-label">标签</span>
+          <% page.tags.each(function (tag) { %><a href="<%- url_for(tag.path) %>"># <%= tag.name %></a><% }); %>
+        </div>
+      <% } %>
+
+      <div class="post-support">
+        <div class="post-support-text">
+          <strong>如果这篇文章对你有帮助</strong>
+          <p>可以请我喝杯咖啡，或者把博客分享给需要的朋友。</p>
+        </div>
+        <button class="btn btn-donate" type="button" data-donate-open>打赏支持</button>
+      </div>
+
+      <%- partial('_partial/share') %>
+    </article>
+
+    <nav class="post-nav" aria-label="上一篇和下一篇">
+      <% if (page.prev) { %>
+        <a class="post-nav-item prev" href="<%- url_for(page.prev.path) %>">
+          <span class="post-nav-label">← 上一篇</span>
+          <strong><%= page.prev.title %></strong>
+        </a>
+      <% } else { %><span class="post-nav-item is-empty"></span><% } %>
+      <% if (page.next) { %>
+        <a class="post-nav-item next" href="<%- url_for(page.next.path) %>">
+          <span class="post-nav-label">下一篇 →</span>
+          <strong><%= page.next.title %></strong>
+        </a>
+      <% } else { %><span class="post-nav-item is-empty"></span><% } %>
+    </nav>
+
+    <section class="card related-card">
+      <div class="section-head compact">
+        <h2>相关推荐</h2>
+        <span>继续阅读</span>
+      </div>
+      <div class="related-grid">
+        <% related_posts(page, 3).forEach(function (post) { %>
+        <a class="related-item" href="<%- url_for(post.path) %>">
+          <img src="<%- url_for(post.cover || '/images/cover-default.svg') %>" alt="<%= post.title %>" loading="lazy">
+          <div class="related-body">
+            <span class="related-cat"><%= post.categories && post.categories.length ? post.categories.first().name : '文章' %></span>
+            <h3><%= post.title %></h3>
+            <time><%= date(post.date, 'YYYY-MM-DD') %></time>
+          </div>
+        </a>
+        <% }); %>
+      </div>
+    </section>
+
+    <%- partial('_partial/comments') %>
+  </div>
+
+  <aside class="sidebar">
+    <% if (theme.sidebar && theme.sidebar.show_toc) { %><%- partial('_partial/toc') %><% } %>
+    <%- partial('_partial/sidebar') %>
+  </aside>
+</div>

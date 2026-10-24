@@ -1,0 +1,21 @@
+<%
+var isFeatured = (typeof featured !== 'undefined') && featured;
+var excerpt = strip_html(post.excerpt || post.content || '').replace(/\s+/g, ' ').trim();
+%>
+<article class="post-card<%= isFeatured ? ' is-featured' : '' %>">
+  <a class="card-cover" href="<%- url_for(post.path) %>" aria-label="<%= post.title %>">
+    <img src="<%- url_for(post.cover || '/images/cover-default.svg') %>" alt="<%= post.title %>" loading="lazy">
+    <% if (post.categories && post.categories.length) { %>
+      <span class="card-cat"><%= post.categories.first().name %></span>
+    <% } %>
+  </a>
+  <div class="card-body">
+    <h2 class="card-title"><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+    <p class="card-excerpt"><%= excerpt.substring(0, 92) %>…</p>
+    <div class="card-meta">
+      <time datetime="<%- date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+      <span class="dot">·</span>
+      <span><%= post.author || config.author %></span>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,55 @@
+<%
+var comments = theme.comments || {};
+var provider = comments.provider || 'giscus';
+var giscus = comments.giscus || {};
+var twikoo = comments.twikoo || {};
+var giscusReady = comments.enable && provider === 'giscus' && giscus.repo && giscus.repo_id;
+var twikooReady = comments.enable && provider === 'twikoo' && twikoo.env_id;
+%>
+<section class="card comments-card" id="comments">
+  <div class="section-head compact">
+    <h2>评论</h2>
+    <span><%= giscusReady || twikooReady ? '欢迎留言' : '尚未启用' %></span>
+  </div>
+
+  <% if (giscusReady) { %>
+    <div class="comments-embed">
+      <script src="https://giscus.app/client.js"
+        data-repo="<%= giscus.repo %>"
+        data-repo-id="<%= giscus.repo_id %>"
+        data-category="<%= giscus.category || 'Announcements' %>"
+        data-category-id="<%= giscus.category_id || '' %>"
+        data-mapping="<%= giscus.mapping || 'pathname' %>"
+        data-strict="<%= giscus.strict || '0' %>"
+        data-reactions-enabled="<%= giscus.reactions_enabled || '1' %>"
+        data-emit-metadata="<%= giscus.emit_metadata || '0' %>"
+        data-input-position="<%= giscus.input_position || 'bottom' %>"
+        data-theme="<%= giscus.theme || 'preferred_color_scheme' %>"
+        data-lang="<%= giscus.lang || 'zh-CN' %>"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  <% } else if (twikooReady) { %>
+    <div id="twikoo-container" class="comments-embed"></div>
+    <script src="<%= twikoo.cdn %>"></script>
+    <script>
+      if (window.twikoo) {
+        twikoo.init({
+          envId: <%- JSON.stringify(twikoo.env_id) %>,
+          el: '#twikoo-container',
+          lang: 'zh-CN'
+        });
+      }
+    </script>
+  <% } else { %>
+    <div class="comments-placeholder">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-4.5A8 8 0 0 1 11 4h2a8 8 0 0 1 8 8Z"></path></svg>
+      <div class="comments-placeholder-text">
+        <p>评论功能已经接好，但还没有启用。</p>
+        <p class="muted">在 <code>themes/aurora/_config.yml</code> 里填写 Giscus 或 Twikoo 参数，并把 <code>comments.enable</code> 改为 <code>true</code>，重新构建后即可显示。</p>
+      </div>
+    </div>
+  <% } %>
+</section>
