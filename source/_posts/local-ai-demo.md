@@ -9,9 +9,9 @@ tags:
   - 示例
 cover: /images/cover-3.svg
 description: 一篇用于展示文章版式的示例文章，包含标题层级、图片、下载入口、代码块与提示框。
+top: false
 ---
-
-<div class="note"><strong>说明：</strong>本文是版式演示文章，内容为虚构示例，仅用于展示标题、图片、下载入口、代码块和提示框的排版效果，请勿当作真实教程。</div>
+**说明：**本文是版式演示文章，内容为虚构示例，仅用于展示标题、图片、下载入口、代码块和提示框的排版效果，请勿当作真实教程。
 
 最新示例模型来了！**DemoModel 2.1** 正式发布，这是一次面向本地部署的更新。与需要分别安装多个组件的旧方案不同，这次把常用能力整合到了同一个工作流里，显存占用也进一步降低。
 
@@ -25,7 +25,7 @@ description: 一篇用于展示文章版式的示例文章，包含标题层级�
 
 **官方下载：【[点击前往](#)】或 【[备用下载](#)】**
 
-<a class="btn btn-primary" href="#" target="_blank" rel="noopener">点击前往</a> <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">备用下载</a>
+[点击前往](#) [备用下载](#http://www.deepseek.com)
 
 安装完成后，打开客户端，确认版本号在 `2.1` 以上。
 
@@ -62,11 +62,11 @@ DemoClient/
 2. 网盘下载：【[点击前往](#)】
 3. 备用下载：【[点击前往](#)】
 
-<div class="download-box">
-<p><strong>文件校验</strong></p>
-<p>下载完成后，建议核对文件大小和 SHA256，避免因网络中断导致模型损坏。</p>
-<p><a class="btn btn-ghost" href="#" target="_blank" rel="noopener">查看校验值</a></p>
-</div>
+**文件校验**
+
+下载完成后，建议核对文件大小和 SHA256，避免因网络中断导致模型损坏。
+
+[查看校验值](#)
 
 ### 四、运行工作流
 
@@ -76,10 +76,9 @@ DemoClient/
 
 > 一张用于演示排版的示例图片：清晨的房间、木质书桌、摊开的笔记本、一杯冒着热气的咖啡，柔和的自然光从窗户照进来，画面安静、干净、有生活感。
 
-<div class="img-grid">
-<img src="/images/cover-1.svg" alt="示例效果图 1">
-<img src="/images/cover-2.svg" alt="示例效果图 2">
-</div>
+![示例效果图 1](/images/cover-1.svg)
+
+![示例效果图 2](/images/cover-2.svg)
 
 如果显存不足，可以尝试降低分辨率、减少参考图数量，或者换用更小的量化版本。
 
@@ -87,10 +86,9 @@ DemoClient/
 
 完整操作过程可以看视频演示。这里先放一个占位区域，后续可以嵌入 B 站或 YouTube 播放器。
 
-<div class="download-box">
-<p><strong>视频地址</strong></p>
-<p>待补充：把视频链接替换到这里，或使用主题提供的视频短代码。</p>
-</div>
+**视频地址**
+
+待补充：把视频链接替换到这里，或使用主题提供的视频短代码。
 
 ## 小结
 
