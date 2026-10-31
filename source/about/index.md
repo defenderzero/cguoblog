@@ -1,11 +1,8 @@
 ---
 title: 关于
-date: 2026-10-24 09:00:00
-layout: page
-description: 关于这个博客和它的主人。
+description: 关于这个博客
 ---
-
-## 你好，我是博主
+## 你好，我是cguo
 
 这是一个个人博客，用来存放那些值得写下来、也值得反复查看的内容。
 
@@ -19,19 +16,21 @@ description: 关于这个博客和它的主人。
 
 ## 关于本站
 
+
 | 项目 | 说明 |
-| --- | --- |
+| ---- | -------------------------------- |
 | 生成框架 | [Hexo](https://hexo.io/zh-cn/) |
 | 主题 | Aurora（自研） |
 | 托管 | EdgeOne Pages / Cloudflare Pages |
-| 评论 | Giscus（计划中） |
+| 评论 | 无 |
 | 数据 | 所有文章均为 Markdown，存放在 Git 仓库 |
+
 
 ## 联系方式
 
-- 邮箱：`hello@example.com`（占位，请替换）
-- GitHub：`https://github.com/yourname`（占位，请替换）
-- 微博：`@yourname`（占位，请替换）
+- 邮箱：cguo20242024`@163.com`
+- GitHub：`https://github.com/defenderzero`
+- 微博：`无`
 
 > 如果你想交换友链，或者发现文章里有错误，欢迎通过上面的方式告诉我。
 
